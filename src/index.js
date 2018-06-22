@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import App from './app'
 import './index.css'
 import firebase from 'firebase'
+import 'firebase/firestore'
 
 const app = firebase.initializeApp({
   apiKey: 'AIzaSyAamz0k64OP6hyONz6tcebonarkEGBCb2I',
@@ -14,5 +15,9 @@ const app = firebase.initializeApp({
 })
 
 console.log(app.name)
+
+const firestore = firebase.firestore()
+const settings = {timestampsInSnapshots: true}
+firestore.settings(settings)
 
 ReactDOM.render(<App />, document.getElementById('root'))
