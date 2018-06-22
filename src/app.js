@@ -13,7 +13,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    firebase.firestore().collection('elements').get().then(querySnapshot => {
+    firebase.firestore().collection('elements').onSnapshot(querySnapshot => {
       const elements = []
       querySnapshot.forEach(doc => elements.push(doc.data()))
       this.setState({elements: elements})
