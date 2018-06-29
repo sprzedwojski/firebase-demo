@@ -12,19 +12,9 @@ class SignInScreen extends Component {
     ]
   }
 
-  componentDidMount() {
-    this.unregisterAuthObserver = firebase.auth()
-      .onAuthStateChanged(user => this.props.handleAuthStateChanged(!!user))
-  }
-
-  componentWillUnmount() {
-    this.unregisterAuthObserver()
-  }
-
   render() {
     return (
       <div>
-        <p>Please sign-in:</p>
         <StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()}/>
       </div>
     )

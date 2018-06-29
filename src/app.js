@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import SignInScreen from './sing-in-screen'
 import firebase from 'firebase'
+import Home from './home'
 
 class App extends Component {
   state = {
@@ -12,7 +13,16 @@ class App extends Component {
     this.setState({signedIn: signedIn})
   }
 
+  componentWillUnmount() {
+    this.unregisterAuthObserver()
+  }
+
   componentDidMount() {
+    this.watchAuth()
+    this.watchElements()
+  }
+
+  watchElements() {
     firebase.firestore().collection('elements').onSnapshot(querySnapshot => {
       const elements = []
       querySnapshot.forEach(doc => elements.push(doc.data()))
@@ -20,19 +30,15 @@ class App extends Component {
     })
   }
 
+  watchAuth() {
+    this.unregisterAuthObserver = firebase.auth()
+      .onAuthStateChanged(user => this.handleAuthStateChanged(!!user))
+  }
+
   render() {
     if (!this.state.signedIn)
-      return <SignInScreen handleAuthStateChanged={(user) => this.handleAuthStateChanged(user)}/>
-    return (
-      <div>
-        <h1>
-          Firebase demo
-        </h1>
-        <ul>
-          {this.state.elements.map(el => <li key={el.name}>{el.name}</li>)}
-        </ul>
-      </div>
-    )
+      return <SignInScreen />
+    return <Home logout={() => firebase.auth().signOut()} elements={this.state.elements}/>
   }
 }
 
