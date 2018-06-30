@@ -35,10 +35,16 @@ class App extends Component {
       .onAuthStateChanged(user => this.handleAuthStateChanged(!!user))
   }
 
+  addElement(name) {
+    firebase.firestore().collection('elements').add({
+      name: name
+    })
+  }
+
   render() {
     if (!this.state.signedIn)
       return <SignInScreen />
-    return <Home logout={() => firebase.auth().signOut()} elements={this.state.elements}/>
+    return <Home logout={() => firebase.auth().signOut()} elements={this.state.elements} addElement={this.addElement}/>
   }
 }
 
