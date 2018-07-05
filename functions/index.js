@@ -3,7 +3,7 @@ const admin = require('firebase-admin')
 admin.initializeApp()
 const translate = require('@google-cloud/translate')()
 
-exports.translateToPolish = functions.firestore
+exports.translateToEnglish = functions.firestore
   .document('elements/{elementId}')
   .onCreate((snap) => {
     const key = snap.key;
