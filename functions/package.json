@@ -9,8 +9,9 @@
     "logs": "firebase functions:log"
   },
   "dependencies": {
+    "firebase-admin": "^5.12.1",
     "firebase-functions": "^1.0.3",
-    "node-fetch": "^2.1.2"
+    "@google-cloud/translate": "^1.1.0"
   },
   "private": true
 }
