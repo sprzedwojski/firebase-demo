@@ -4,11 +4,13 @@ import firebase from 'firebase'
 
 class App extends Component {
   state = {
-    isLoggedIn: false
+    isLoggedIn: false,
+    elements: [],
+    inputVal: ''
   }
 
   render() {
-    const {isLoggedIn} = this.state
+    const {isLoggedIn, elements, inputVal} = this.state
 
     if(!isLoggedIn)
       return <Login/>
