@@ -5,7 +5,7 @@ import firebase from 'firebase'
 class Login extends Component {
   render() {
     return (
-      <div>Login</div>
+      <div className='app'>Login</div>
     )
   }
 }

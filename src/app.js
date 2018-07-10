@@ -15,7 +15,9 @@ class App extends Component {
     if(!isLoggedIn)
       return <Login/>
     return (
-      <div>Firebase demo, woohoo!</div>
+      <div className='app'>
+        Firebase demo, woohoo!
+      </div>
     )
   }
 }
