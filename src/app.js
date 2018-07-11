@@ -22,7 +22,9 @@ class App extends Component {
       return <Login/>
     return (
       <div className='app'>
-        Firebase demo, woohoo!
+        <button onClick={() => firebase.auth().signOut()}>
+          Logout
+        </button>
       </div>
     )
   }
