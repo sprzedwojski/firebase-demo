@@ -13,6 +13,16 @@ class App extends Component {
     firebase.auth()
       .onAuthStateChanged(user =>
       this.setState({isLoggedIn: !!user}))
+
+    firebase.firestore()
+      .collection('cities')
+      .onSnapshot(querySnapshot => {
+        const elements = []
+        querySnapshot.forEach(doc =>
+          elements.push({id: doc.id, ...doc.data()})
+        )
+        this.setState({elements: elements})
+      })
   }
 
   render() {
@@ -25,6 +35,14 @@ class App extends Component {
         <button onClick={() => firebase.auth().signOut()}>
           Logout
         </button>
+
+        <ul>
+          {elements.map(el =>
+            <li key={el.id}>
+              {el.name} <br/><i>{el.coolness}</i>
+            </li>
+          )}
+        </ul>
       </div>
     )
   }
