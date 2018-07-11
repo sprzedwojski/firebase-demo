@@ -15,7 +15,7 @@ class App extends Component {
       this.setState({isLoggedIn: !!user}))
 
     firebase.firestore()
-      .collection('cities')
+      .collection('elements')
       .onSnapshot(querySnapshot => {
         const elements = []
         querySnapshot.forEach(doc =>
@@ -29,7 +29,7 @@ class App extends Component {
     e.preventDefault()
 
     firebase.firestore()
-      .collection('cities')
+      .collection('elements')
       .add({name: this.state.inputVal})
       .then(() => console.log('Document added'))
 
@@ -50,7 +50,7 @@ class App extends Component {
         <ul>
           {elements.map(el =>
             <li key={el.id}>
-              {el.name} <br/><i>{el.coolness}</i>
+              {el.name} <br/><i>{el.translated}</i>
             </li>
           )}
         </ul>
