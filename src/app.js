@@ -25,6 +25,17 @@ class App extends Component {
       })
   }
 
+  handleSubmit(e) {
+    e.preventDefault()
+
+    firebase.firestore()
+      .collection('cities')
+      .add({name: this.state.inputVal})
+      .then(() => console.log('Document added'))
+
+    this.setState({inputVal: ''})
+  }
+
   render() {
     const {isLoggedIn, elements, inputVal} = this.state
 
@@ -43,6 +54,15 @@ class App extends Component {
             </li>
           )}
         </ul>
+
+        <form onSubmit={e => this.handleSubmit(e)}>
+          <input
+            value={inputVal}
+            onChange={e => this.setState({
+              inputVal: e.target.value
+            })}
+          />
+        </form>
       </div>
     )
   }
