@@ -9,6 +9,12 @@ class App extends Component {
     inputVal: ''
   }
 
+  componentDidMount() {
+    firebase.auth()
+      .onAuthStateChanged(user =>
+      this.setState({isLoggedIn: !!user}))
+  }
+
   render() {
     const {isLoggedIn, elements, inputVal} = this.state
 
